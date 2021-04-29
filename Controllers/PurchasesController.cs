@@ -54,7 +54,7 @@ namespace PharmacyStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PurchaseID,PurchaseDate,PurchaseBillNo,VendorName,PurchaseTotalAmount")] Purchase purchase)
+        public async Task<IActionResult> Create( Purchase purchase)
         {
             if (ModelState.IsValid)
             {

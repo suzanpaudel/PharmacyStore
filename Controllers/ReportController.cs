@@ -96,16 +96,26 @@ namespace PharmacyStore.Controllers
         }
 
         //Question No 11
-        public IActionResult OutOfStockItemsReport()
+        public IActionResult OutOfStockItemsReport([FromQuery]  string sort="")
         {
             List<ProductStockViewModel> lstData = new List<ProductStockViewModel>();
 
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
+                if (sort == "name" || sort == "")
+                {
+                    command.CommandText = @"SELECT p.ProductId, p.ProductName, ps.StockQuantity FROM Product p 
+                                        INNER JOIN ProductStock ps on p.ProductId=ps.ProductId
+                                        WHERE ps.StockQuantity <10 ORDER BY p.ProductName";
 
+                }else if (sort == "quantity")
+                {
+
+                
                 command.CommandText = @"SELECT p.ProductId, p.ProductName, ps.StockQuantity FROM Product p 
                                         INNER JOIN ProductStock ps on p.ProductId=ps.ProductId
-                                        WHERE ps.StockQuantity <10";
+                                        WHERE ps.StockQuantity <10 ORDER BY ps.StockQuantity DESC";
+                }
 
                 _context.Database.OpenConnection();
 
@@ -134,10 +144,10 @@ namespace PharmacyStore.Controllers
 
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                command.CommandText = @"SELECT CustomerName, CustomerEmail, CustomerPhone, CustomerAddress from Customer
+                command.CommandText = @"SELECT CustomerName, CustomerEmail, CustomerPhoneNo, CustomerAddress from Customer
                                         WHERE CustomerID NOT IN
                                         (SELECT DISTINCT CustomerID FROM Sales 
-                                        WHERE SalesDate > SYSDATE- 31)";
+                                        WHERE SalesDate > GETDATE() -31)";
 
                 _context.Database.OpenConnection();
 
@@ -170,10 +180,9 @@ namespace PharmacyStore.Controllers
                                         JOIN product p ON p.ProductID = ps.ProductID
                                         WHERE ps.StockQuantity >=10 AND p.ProductID NOT IN 
                                         (SELECT DISTINCT sd.ProductID from Sales s
-                                        JOIN SalesDetail sd on sd.SalesID = s.SalesID)
+                                        JOIN SalesDetail sd on sd.SalesID = s.SalesID
+                                        WHERE s.SalesDate > GETDATE() - 31)
                                         ";
-
-                //WHERE s.SalesDate > " + DateTime.Now +" - 31)
                 _context.Database.OpenConnection();
 
                 using (var result = command.ExecuteReader())

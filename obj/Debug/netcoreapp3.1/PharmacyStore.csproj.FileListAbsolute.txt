@@ -418,3 +418,16 @@ D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Views\SalesDetails\Index.cshtml.g
 D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Views\Report\InactiveItemsReport.cshtml.g.cs
 D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Views\Report\InactiveCustomersReport.cshtml.g.cs
 D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Views\Report\OutOfStockItemsReport.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\AccessDenied.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ResetPassword.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_StatusMessage.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+D:\PharmacyStore\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
