@@ -1,0 +1,41 @@
+﻿@model PharmacyStore.ViewModel.SalesInfo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Billing Summary</h4>
+<hr />
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title text-center">Unique Pharmacy Store</h4>
+        <h6 class="card-subtitle mb-2 text-muted text-center">Baneshwor, Kathmandu</h6>
+    </div>
+    <div class="card-body p-4">
+        
+        <h6>CustomerName: @Html.DisplayFor(model =>model.CustomerName)</h6>
+        <h6>CustomerEmail: @Html.DisplayFor(model =>model.Email)</h6>
+        
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ProductName</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.ProductName)</td>
+                        <td>@Html.DisplayFor(model => model.Description)</td>
+                        <td>@Html.DisplayFor(model => model.CategoryName)</td>
+                        <td>@Html.DisplayFor(model => model.Quantity)</td>
+                        <td>@Html.DisplayFor(model => model.Price)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+<button class="btn btn-outline-primary my-4">CheckOut</button>

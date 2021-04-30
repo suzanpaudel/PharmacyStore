@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PharmacyStore\\PharmacyStore.csproj": {}
+    "E:\\PharmacyStore\\PharmacyStore.csproj": {}
   },
   "projects": {
-    "D:\\PharmacyStore\\PharmacyStore.csproj": {
+    "E:\\PharmacyStore\\PharmacyStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PharmacyStore\\PharmacyStore.csproj",
+        "projectUniqueName": "E:\\PharmacyStore\\PharmacyStore.csproj",
         "projectName": "PharmacyStore",
-        "projectPath": "D:\\PharmacyStore\\PharmacyStore.csproj",
+        "projectPath": "E:\\PharmacyStore\\PharmacyStore.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "D:\\PharmacyStore\\obj\\",
+        "outputPath": "E:\\PharmacyStore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",

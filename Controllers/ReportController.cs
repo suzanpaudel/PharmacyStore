@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PharmacyStore.Data;
 using PharmacyStore.ViewModel;
@@ -20,6 +21,71 @@ namespace PharmacyStore.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        //public IActionResult SalesInfoReport()
+        //{
+        //    List<SalesInfo> lstData = new List<SalesInfo>();
+
+        //    ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryName");
+        //    ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerName");
+
+        //    return View(lstData);
+
+        //}
+
+        public IActionResult SalesEntryForm()
+        {
+            ViewData["ProductID"] = new SelectList(_context.Product, "ProductID", "ProductName");
+            ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerName");
+
+            return View();
+        }
+
+        public IActionResult BillingReport([FromQuery] int CustomerID, int ProductID, int Quantity, int SellingPrice)
+        {
+            List<SalesInfo> lstData = new List<SalesInfo>();
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = "SELECT p.ProductId,  p.ProductName, p.Description, c.CategoryName from Product p JOIN Category c ON c.CategoryID = p.CategoryID where ProductId =" + ProductID;
+            
+                _context.Database.OpenConnection();
+                
+                SalesInfo data;
+
+                data = new SalesInfo();
+
+                data.Quantity = Quantity;
+                data.Price = SellingPrice;
+
+                using (var result = command.ExecuteReader())
+                {
+                    while (result.Read())
+                    {
+                        data.ProductID = result.GetInt32(0);
+                        data.ProductName = result.GetString(1);
+                        data.Description = result.GetString(2);
+                        data.CategoryName = result.GetString(3);
+                        lstData.Add(data);
+                    }
+                }
+
+                command.CommandText = "SELECT CustomerId, CustomerName, CustomerEmail from Customer where CustomerId =" + CustomerID;
+
+                _context.Database.OpenConnection();
+
+                using (var result = command.ExecuteReader())
+                {
+                    while (result.Read())
+                    {
+                        data.CustomerID = result.GetInt32(0);
+                        data.CustomerName = result.GetString(1);
+                        data.Email = result.GetString(2);
+                        lstData.Add(data);
+                    }
+                }
+            }
+            return View(lstData[0]);
         }
 
         public IActionResult ListStockReport([FromQuery] string name = "")
@@ -87,6 +153,35 @@ namespace PharmacyStore.Controllers
                         //data.Quantity = int.Parse(result.GetString(2));
                         data.SellingPrice = result.GetInt32(3);
                         //data.SellingPrice = int.Parse(result.GetString(2));
+                        lstData.Add(data);
+                    }
+                }
+            }
+
+            return View(lstData);
+        }
+
+        //Question No 10
+        public IActionResult NotPurchaseItemReport()
+        {
+            List<NotPurchaseItemViewModel> lstData = new List<NotPurchaseItemViewModel>();
+
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = @"SELECT p.ProductId, p.ProductName, p.Description FROM Product p
+                                        WHERE p.ProductId NOT IN 
+                                        (SELECT DISTINCT ProductID from PurchaseDetail)";
+                _context.Database.OpenConnection();
+
+                using (var result = command.ExecuteReader())
+                {
+                    NotPurchaseItemViewModel data;
+                    while (result.Read())
+                    {
+                        data =new NotPurchaseItemViewModel();
+                        data.ProductId = result.GetInt32(0);
+                        data.ProductName = result.GetString(1);
+                        data.Description = result.GetString(2);
                         lstData.Add(data);
                     }
                 }
@@ -202,53 +297,59 @@ namespace PharmacyStore.Controllers
             return View(lstData);
         }
 
-        //public IActionResult NotSoldReport()
+        //Question No 14
+        public IActionResult UsersReport()
+        {
+            List<UserModel> lstData = new List<UserModel>();
+
+            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            {
+                command.CommandText = @"select username, email, phonenumber from AspNetUsers where id in (
+                                        select userid from AspNetUserRoles where roleid = 2);";
+                _context.Database.OpenConnection();
+
+                using (var result = command.ExecuteReader())
+                {
+                    UserModel data;
+                    while (result.Read())
+                    {
+                        data = new UserModel();
+                        data.UserName = result.GetString(0);
+                        data.PhoneNumber = result.GetString(1);
+                        data.Email = result.GetString(2);
+                        lstData.Add(data);
+                    }
+                }
+            }
+
+            return View(lstData);
+        }
+
+        //public IActionResult DeleteUsers()
         //{
-        //    List<NotSoldItemViewModel> lstData = new List<NotSoldItemViewModel>();
+        //    List<UserReportViewModel> lstData = new List<UserReportViewModel>();
 
         //    using (var command = _context.Database.GetDbConnection().CreateCommand())
         //    {
-        //        select product.productName
-        //                from productStock PS
-        //                join product on
-        //                product.ProductID = PS.productID
-        //                where PS.stockQuantity >= 10 and product.ProductId not in 
-        //                (select distinct SD.productID
-        //                from sales
-        //                join SalesDetail SD on
-        //                SD.salesID = sales.SalesID
-        //                where sales.salesDate > sysdate - 31)
-        //        command.CommandText = @"SELECT p.ProductName, p.Description, ps.StockQuantity
-        //                                FROM ProductStock ps
-        //                                JOIN Product p on p.ProductID = ps.ProductID
-        //                                WHERE ps.StockQuantity >= 10 AND p.ProductID NOT IN
-        //                                (SELECT DISTINCT sd.ProductID FROM Sales s
-        //                                JOIN SalesDetail sd on sd.SalesID = s.SalesID
-        //                                WHERE s.salesDate
-        //                                )
-
-        //                                ";
-        //        command.CommandText = "SELECT p.ProductId, p.ProductName, ps.StockQuantity from Product p inner join ProductStock ps on p.ProductId=ps.ProductId";
+        //        command.CommandText = @"?";
         //        _context.Database.OpenConnection();
 
         //        using (var result = command.ExecuteReader())
         //        {
-        //            ProductStockViewModel data;
+        //            UserReportViewModel data;
         //            while (result.Read())
         //            {
-        //                data = new ProductStockViewModel();
-        //                data.ProductId = result.GetInt32(0);
-        //                //data.ProductId = int.Parse(result.GetString(0));
-        //                data.ProductName = result.GetString(1);
-        //                data.Quantity = result.GetInt32(2);
-        //                //data.Quantity = int.Parse(result.GetString(2));
+        //                data = new UserReportViewModel();
+        //                data.UserName = result.GetString(0);
+        //                data.PhoneNumber = result.GetString(1);
+        //                data.Email = result.GetString(2);
         //                lstData.Add(data);
         //            }
         //        }
         //    }
 
-        //    return View(lstData.OrderBy(x => x.ProductName));
+        //    return View(lstData);
         //}
-        //.OrderBy(x=>x.ProductName)
+
     }
 }

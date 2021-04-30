@@ -9,40 +9,162 @@
 <h4>Purchase</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col">
+        <form method="post">
             <div class="form-group">
-                <label asp-for="PurchaseDate" class="control-label"></label>
-                <input asp-for="PurchaseDate" class="form-control" />
-                <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+                <label for="purchaseDate">Purchase Date</label>
+                <input type="date" id="purchaseDate" name="PurchaseDate" value="" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="PurchaseBillNo" class="control-label"></label>
-                <input asp-for="PurchaseBillNo" class="form-control" />
-                <span asp-validation-for="PurchaseBillNo" class="text-danger"></span>
+                <label for="purchaseBillNo">Purchase Bill No</label>
+                <input type="number" name="PurchaseBillNo" id="purchaseBillNo" value="" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="VendorName" class="control-label"></label>
-                <input asp-for="VendorName" class="form-control" />
-                <span asp-validation-for="VendorName" class="text-danger"></span>
+                <label for="vendorName">Vendor Name</label>
+                <input type="text" name="VendorName" id="vendorName" value="" class="form-control" />
             </div>
-            <div class="form-group">
-                <label asp-for="PurchaseTotalAmount" class="control-label"></label>
-                <input asp-for="PurchaseTotalAmount" class="form-control" />
-                <span asp-validation-for="PurchaseTotalAmount" class="text-danger"></span>
+            <div>
+                <button class="btn btn-outline-primary my-2 addSinglePurchase" data-added="0">Add Product</button>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div id="purchaseList">
+                <div id="purchaseItem-1">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="productName">ProductName</label>
+                                <select class="custom-select" name="Detail[0].ProductID" id="productName">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="productQuantity">Quantity</label>
+                                <input type="number"
+                                       value=""
+                                       id="productQuantity"
+                                       class="form-control" name="Detail[0].Quantity"/>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="productPrice">Price</label>
+                                <input type="number"
+                                       value=""
+                                       id="productPrice"
+                                       class="form-control" name="Detail[0].PurchasePrice"/>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="manuDate">Manufactured Date</label>
+                                <input type="date"
+                                       value=""
+                                       id="manuDate"
+                                       class="form-control" name="Detail[0].ManufacturedDate"/>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="expDate">Expired Date</label>
+                                <input type="date"
+                                       value=""
+                                       id="expDate"
+                                       class="form-control" name="Detail[0].ExpiryDate"/>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <button class="btn btn-outline-danger mt-4 deletePurchaseItem"
+                                        data-id="1">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" value="Save Purchase" />
             </div>
         </form>
+        @*<form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="PurchaseDate" class="control-label"></label>
+                    <input asp-for="PurchaseDate" class="form-control" />
+                    <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PurchaseBillNo" class="control-label"></label>
+                    <input asp-for="PurchaseBillNo" class="form-control" />
+                    <span asp-validation-for="PurchaseBillNo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VendorName" class="control-label"></label>
+                    <input asp-for="VendorName" class="form-control" />
+                    <span asp-validation-for="VendorName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PurchaseTotalAmount" class="control-label"></label>
+                    <input asp-for="PurchaseTotalAmount" class="form-control" />
+                    <span asp-validation-for="PurchaseTotalAmount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>*@
     </div>
-</div>
 
+</div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+    jQuery(document).delegate(
+        'button.addSinglePurchase',
+        'click',
+        function (e) {
+            e.preventDefault();
+            var content = jQuery('#purchaseItem-1'),
+                size = jQuery('#purchaseList > div').length + 1,
+                element = null,
+                element = content.clone();
+            console.log(size);
+            element.attr('id', 'purchaseItem-' + size);
+            element.find('.deletePurchaseItem').attr('data-id', size);
+            element.appendTo('#purchaseList');
+        }
+    );
+
+    jQuery(document).delegate(
+        'button.deletePurchaseItem',
+        'click',
+        function (e) {
+            e.preventDefault();
+            var didConfirm = confirm('Are you sure you want to delete');
+
+            if (didConfirm == true) {
+                var id = jQuery(this).attr('data-id');
+                console.log(id);
+                var targetDiv = jQuery(this).attr('targetDiv');
+                jQuery('#purchaseItem-' + id).remove();
+
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    );
+                }}
+</script>
+
 }

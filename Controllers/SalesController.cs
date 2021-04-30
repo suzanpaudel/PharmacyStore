@@ -49,6 +49,7 @@ namespace PharmacyStore.Controllers
         public IActionResult Create()
         {
             ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerName");
+            ViewData["ProductID"] = new SelectList(_context.Product, "ProductID", "ProductName");
             return View();
         }
 

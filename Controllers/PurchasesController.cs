@@ -25,23 +25,7 @@ namespace PharmacyStore.Controllers
             return View(await _context.Purchase.ToListAsync());
         }
 
-        // GET: Purchases/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var purchase = await _context.Purchase
-                .FirstOrDefaultAsync(m => m.PurchaseID == id);
-            if (purchase == null)
-            {
-                return NotFound();
-            }
-
-            return View(purchase);
-        }
+       
 
         // GET: Purchases/Create
         public IActionResult Create()
@@ -65,6 +49,26 @@ namespace PharmacyStore.Controllers
             return View(purchase);
         }
 
+        //Yo pani ne herda ni hunxa
+        // GET: Purchases/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var purchase = await _context.Purchase
+                .FirstOrDefaultAsync(m => m.PurchaseID == id);
+            if (purchase == null)
+            {
+                return NotFound();
+            }
+
+            return View(purchase);
+        }
+
+        //Edit garne part naherda hunxa
         // GET: Purchases/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,6 +85,7 @@ namespace PharmacyStore.Controllers
             return View(purchase);
         }
 
+        //Edit garda ko part naherda ni hunxa
         // POST: Purchases/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -116,6 +121,8 @@ namespace PharmacyStore.Controllers
             return View(purchase);
         }
 
+
+        // Delete Click garda aaune part naherda ni hunxa
         // GET: Purchases/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -134,6 +141,7 @@ namespace PharmacyStore.Controllers
             return View(purchase);
         }
 
+        //Delete nahereni hunxa
         // POST: Purchases/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

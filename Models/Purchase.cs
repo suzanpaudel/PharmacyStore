@@ -24,5 +24,7 @@ namespace PharmacyStore.Models
 		[Required]
 		public int PurchaseTotalAmount { get; set; }
 
+		public List<PurchaseDetail> Detail { get; set; }
+
 	}
 }

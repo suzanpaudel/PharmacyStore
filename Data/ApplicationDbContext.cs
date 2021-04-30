@@ -21,5 +21,6 @@ namespace PharmacyStore.Data
         public DbSet<PharmacyStore.Models.PurchaseDetail> PurchaseDetail { get; set; }
         public DbSet<PharmacyStore.Models.Sales> Sales { get; set; }
         public DbSet<PharmacyStore.Models.SalesDetail> SalesDetail { get; set; }
+
     }
 }
