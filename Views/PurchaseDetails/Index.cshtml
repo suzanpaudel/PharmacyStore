@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>
@@ -24,9 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ExpiryDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Remarks)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Product)
             </th>
@@ -37,35 +37,41 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchasePrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ManufacturedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpiryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Remarks)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Purchase.VendorName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PurchaseDetailID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PurchaseDetailID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PurchaseDetailID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchasePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManufacturedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpiryDate)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Remarks)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchase.VendorName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PurchaseDetailID" class="btn btn-sm btn-outline-primary btn-block">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.PurchaseDetailID" class="btn btn-sm btn-outline-info btn-block">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.PurchaseDetailID"  class="btn btn-sm btn-outline-danger btn-block">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@*@
+@*class="btn btn-sm btn-outline-info"*@
+
+@*class="btn btn-sm btn-outline-danger"*@

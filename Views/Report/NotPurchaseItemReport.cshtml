@@ -4,9 +4,9 @@
     ViewData["Title"] = "Product Details";
 }
 
-<h1>Inactive Product Details Details Report</h1>
+<h1>Not Purchased Product Details Report</h1>
 
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>
@@ -28,7 +28,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td> <a href="/Products/Delete/@item.ProductId">Delete</a></td>  
+                <td> <a href="/Products/Delete/@item.ProductId" class="btn btn-sm btn-outline-danger">Delete</a></td>  
             </tr>
         }
     </tbody>

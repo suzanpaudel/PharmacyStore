@@ -7,9 +7,9 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-primary">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered text-center">
     <thead>
         <tr>
             <th>
@@ -24,7 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PurchaseTotalAmount)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.PurchaseTotalAmount)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PurchaseID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PurchaseID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PurchaseID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.PurchaseID" class="btn btn-outline-primary btn-sm">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.PurchaseID" class="btn btn-outline-info btn-sm">Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.PurchaseID" class="btn btn-outline-danger btn-sm">Delete</a>
             </td>
         </tr>
 }

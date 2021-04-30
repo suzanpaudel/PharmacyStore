@@ -109,15 +109,10 @@ namespace PharmacyStore.Controllers
             return View(user);
             
         }
-        private void Errors(IdentityResult result)
-        {
-            foreach (IdentityError error in result.Errors)
-                ModelState.AddModelError("", error.Description);
-        }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> Delete(string? id)
-        { 
+        public async Task<IActionResult> Delete(string id)
+        {
             IdentityUser user = await userManager.FindByIdAsync(id);
 
             if (user != null)
@@ -131,6 +126,12 @@ namespace PharmacyStore.Controllers
             else
                 ModelState.AddModelError("", "User Not Found");
             return View("Index");
+        }
+
+        private void Errors(IdentityResult result)
+        {
+            foreach (IdentityError error in result.Errors)
+                ModelState.AddModelError("", error.Description);
         }
     }
 }

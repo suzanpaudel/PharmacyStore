@@ -5,7 +5,7 @@
 }
 
 <div>
-    <h1 class="display-4 text-center">Welcome</h1>
+    <h1 class="display-4 text-center">Welcome to Pharmacy Store!</h1>
     <div class="row justify-content-center">
         <div class="col-8">
             <div class="alert alert-danger" role="alert">
@@ -36,6 +36,15 @@
                     </div>
                 </div>
             </a>
+            <a href="/Purchases">
+                <div class="card p-0">
+                    <div class="model-wraper">
+                        <div class="card-common">
+                            <h3 class="card-common-text">Purchase Info</h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
             <a href="/Customers">
                 <div class="card p-0">
                     <div class="model-wraper">
@@ -49,16 +58,7 @@
                 <div class="card p-0">
                     <div class="model-wraper">
                         <div class="card-common">
-                            <h3 class="card-common-text">Customer Purchase Details*</h3>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="/Report/ListStockReport">
-                <div class="card p-0">
-                    <div class="model-wraper">
-                        <div class="card-common">
-                            <h3 class="card-common-text">Inactive Customers*</h3>
+                            <h3 class="card-common-text">Stock Information</h3>
                         </div>
                     </div>
                 </div>
@@ -66,38 +66,38 @@
         </div>
 
         <div class="row m-0 justify-content-around" style="margin-top: 20px !important;">
-            <a href="/PurchaseDetails">
+            <a href="/Report/SalesEntryForm">
                 <div class="card p-0">
                     <div class="model-wraper">
                         <div class="card-common">
-                            <h3 class="card-common-text">Purchase Details</h3>
+                            <h3 class="card-common-text">Sales Info</h3>
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="/SalesDetails">
+            <a href="/Report/CustomerPurchaseHistoryReport">
                 <div class="card p-0">
                     <div class="model-wraper">
                         <div class="card-common">
-                            <h3 class="card-common-text">Sales Details</h3>
+                            <h3 class="card-common-text">Customer Purchase History</h3>
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="/Report/ListStockReport">
+            <a href="/Report/NotPurchaseItemReport">
                 <div class="card p-0">
                     <div class="model-wraper">
                         <div class="card-common">
-                            <h3 class="card-common-text">Stock Details*</h3>
+                            <h3 class="card-common-text">Delete Products</h3>
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="/Report/ListStockReport">
+            <a href="/Report/OutofStockItemsReport">
                 <div class="card p-0">
                     <div class="model-wraper">
                         <div class="card-common">
-                            <h3 class="card-common-text">Out of Stock*</h3>
+                            <h3 class="card-common-text">Out of Stock</h3>
                         </div>
                     </div>
                 </div>
@@ -105,20 +105,29 @@
         </div>
 
         <div class="row m-0 justify-content-center" style="margin-top: 20px !important;">
-            <a href="/Report/ListStockReport" style="margin-right: 10px;">
+            <a href="/Report/InactiveItemsReport" style="margin-right: 10px;">
                 <div class="card p-0">
                     <div class="model-wraper">
                         <div class="card-common">
-                            <h3 class="card-common-text">Remove Product*</h3>
+                            <h3 class="card-common-text">Unsold Products</h3>
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="/Report/ListStockReport" style="margin-left: 10px;">
+            <a href="/Report/InactiveCustomersReport" style="margin-left: 10px;">
                 <div class="card p-0">
                     <div class="model-wraper">
                         <div class="card-common">
-                            <h3 class="card-common-text">Inactive Product*</h3>
+                            <h3 class="card-common-text">Inactive Customers</h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="/Users" style="margin-left: 10px;">
+                <div class="card p-0">
+                    <div class="model-wraper">
+                        <div class="card-common">
+                            <h3 class="card-common-text">UserManagement</h3>
                         </div>
                     </div>
                 </div>

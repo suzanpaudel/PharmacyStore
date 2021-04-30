@@ -23,16 +23,7 @@ namespace PharmacyStore.Controllers
             return View();
         }
 
-        //public IActionResult SalesInfoReport()
-        //{
-        //    List<SalesInfo> lstData = new List<SalesInfo>();
 
-        //    ViewData["CategoryID"] = new SelectList(_context.Category, "CategoryID", "CategoryName");
-        //    ViewData["CustomerID"] = new SelectList(_context.Customer, "CustomerID", "CustomerName");
-
-        //    return View(lstData);
-
-        //}
 
         public IActionResult SalesEntryForm()
         {
@@ -123,19 +114,32 @@ namespace PharmacyStore.Controllers
             return View(lstData);
         }
 
-        public IActionResult CustomerPurchaseHistoryReport([FromQuery] string name = "")
+        public IActionResult CustomerPurchaseHistoryReport([FromQuery] string CustomerId = "")
         {
             List<CustomerPurchaseHistoryViewModel> lstData = new List<CustomerPurchaseHistoryViewModel>();
 
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                if (name == "")
+                if (CustomerId == "")
                 {
-                    command.CommandText = "SELECT p.ProductId, p.ProductName, sd.Quantity, sd.SellingPrice from Sales JOIN SalesDetail sd ON Sales.SalesID = sd.SalesID JOIN Product p on p.ProductID = sd.ProductID";
+
+
+                    command.CommandText = @"SELECT c.MemberNo, c.CustomerName, p.ProductName, sd.Quantity, sd.SellingPrice
+                                            FROM Sales s
+                                            JOIN SalesDetail sd ON s.SalesID = sd.SalesID
+                                            JOIN Product p ON p.ProductID = sd.ProductID
+                                            JOIN Customer c ON c.CustomerID = s.CustomerID
+                                            WHERE s.SalesDate > GETDATE() - 31";
                 }
                 else
                 {
-                    command.CommandText = "SELECT p.ProductId, p.ProductName, sd.Quantity, sd.SellingPrice from Sales JOIN SalesDetail sd ON Sales.SalesID = sd.SalesID JOIN Product p on p.ProductID = sd.ProductID where sales.customerID ='"+ name+ "'";
+                    var id = int.Parse(CustomerId);
+                    command.CommandText = @"SELECT c.MemberNo, c.CustomerName, p.ProductName, sd.Quantity, sd.SellingPrice
+                                            FROM Sales s
+                                            JOIN SalesDetail sd ON s.SalesID = sd.SalesID
+                                            JOIN Product p ON p.ProductID = sd.ProductID
+                                            JOIN Customer c ON c.CustomerID = s.CustomerID
+                                            WHERE c.CustomerId = "+ id +"AND s.SalesDate > GETDATE() - 31";
 
                 }
                 _context.Database.OpenConnection();
@@ -146,13 +150,11 @@ namespace PharmacyStore.Controllers
                     while (result.Read())
                     {
                         data = new CustomerPurchaseHistoryViewModel();
-                        data.ProductId = result.GetInt32(0);
-                        //data.ProductId = int.Parse(result.GetString(0));
-                        data.ProductName = result.GetString(1);
-                        data.Quantity = result.GetInt32(2);
-                        //data.Quantity = int.Parse(result.GetString(2));
-                        data.SellingPrice = result.GetInt32(3);
-                        //data.SellingPrice = int.Parse(result.GetString(2));
+                        data.CustomerId = result.GetInt32(0);
+                        data.CustomerName = result.GetString(1);
+                        data.ProductName = result.GetString(2);
+                        data.Quantity = result.GetInt32(3);
+                        data.SellingPrice = result.GetInt32(4);
                         lstData.Add(data);
                     }
                 }
